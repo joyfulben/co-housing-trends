@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.header-container {
+  height: 150px;
+  background: rgb(209, 235, 255);
+  display: flex;
+}
+.ocm-logo {
+  height: 100px;
+  margin: auto 50px;
+}
