@@ -1,7 +1,7 @@
 import React from "react";
 // import { useEffect } from "react";
 import { Line } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, LineController, PointElement, Title, Tooltip, Legend, LineElement } from "chart.js";
+import { Chart as ChartJS, CategoryScale, LinearScale, LineController, PointElement, Title, Tooltip, Legend, LineElement, plugins } from "chart.js";
 import api from '../api/get'
 import { useState } from 'react';
 
@@ -61,10 +61,14 @@ export const ChartDisplay = (props) => {
                 }
               },
               backgroundColor: [
-                '#257180',
-                '#F2E5BF',
-                '#FD8B51',
-                '#CB6040'
+                'rgb(0, 219, 76)',
+                'rgb(0, 224, 81)',
+                'rgb(0, 229, 86)',
+                'rgb(0, 234, 91)',
+                'rgb(0, 239, 96)',
+                'rgb(0, 244, 101)',
+                'rgb(0, 249, 106)',
+                'rgb(0, 254, 111)'
               ],
               borderColor: [
                 'silver'
@@ -72,12 +76,35 @@ export const ChartDisplay = (props) => {
               borderWidth: 1,
               pointStyle: "rectRot",
               radius: 10,
-              hoverRadius: 8
-            }]
-          };
+              hoverRadius: 8,
+                tooltip: 
+                    {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
 
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }],
+          };
+          const options = {
+            responsive: true,
+            plugins: {
+                tooltip: {
+                    backgroundColor: '#ff789a'
+                }
+            }
+          }
   return(
-        <div id="graph-container"><Line data={sampleData}></Line></div>
+        <div id="graph-container"><Line options={options} data={sampleData}></Line></div>
   )
  
 }
