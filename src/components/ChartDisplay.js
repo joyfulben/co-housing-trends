@@ -69,7 +69,10 @@ export const ChartDisplay = (props) => {
               borderColor: [
                 'silver'
               ],
-              borderWidth: 1
+              borderWidth: 1,
+              pointStyle: "rectRot",
+              radius: 10,
+              hoverRadius: 8
             }]
           };
 
