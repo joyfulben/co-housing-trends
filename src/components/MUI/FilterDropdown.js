@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function DropdownSelect(props) {
+export default function FilterDropdown(props) {
     const [filter, setFilter] = useState('alphabet');
   const handleFilterChange = (event) => {
     setFilter(event.target.value);

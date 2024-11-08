@@ -5,7 +5,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, LineController, PointElem
 import api from '../api/get'
 import { useState } from 'react';
 import FilterButton from './MUI/FilterButton';
-import DropdownSelect from './MUI/DropdownSelect';
+import FilterDropdown from './MUI/FilterDropdown';
 
 ChartJS.register(
     CategoryScale, LinearScale,LineElement, LineController, PointElement, Title, Tooltip, Legend
@@ -119,7 +119,7 @@ export const ChartDisplay = (props) => {
   return(
         <div>
             <div className="filter-btn-container">
-            <DropdownSelect chartData={chartData} setChartData={setChartData} wages={wages} setWages={setWages} formatChartData={formatChartData}></DropdownSelect>
+            <FilterDropdown chartData={chartData} setChartData={setChartData} wages={wages} setWages={setWages} formatChartData={formatChartData}></FilterDropdown>
             </div>
             <div id="graph-container">
                 <Line options={options} data={sampleData}></Line>
