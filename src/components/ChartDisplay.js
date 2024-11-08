@@ -18,10 +18,12 @@ export const ChartDisplay = (props) => {
             const newLabels=[];
             const newWages=[];
             wages.map((state,index)=>{
-                if(state['Year']=== '2022'){
-                    newLabels.push(state['State']);
-                    let roundWage = Math.round(state['Average Wage']);
-                    newWages.push(roundWage);
+                if(state['State']!=='#null'){
+                    if(state['Year']=== '2022'){
+                        newLabels.push(state['State']);
+                        let roundWage = Math.round(state['Average Wage']);
+                        newWages.push(roundWage);
+                    }
                 }
             });
             setChartData({labels:newLabels,wages:newWages});
