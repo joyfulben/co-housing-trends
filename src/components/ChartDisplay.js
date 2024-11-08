@@ -4,13 +4,14 @@ import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, LineController, PointElement, Title, Tooltip, Legend, LineElement, plugins } from "chart.js";
 import api from '../api/get'
 import { useState } from 'react';
+import FilterButton from './MUI/FilterButton';
+import DropdownSelect from './MUI/DropdownSelect';
 
 ChartJS.register(
     CategoryScale, LinearScale,LineElement, LineController, PointElement, Title, Tooltip, Legend
 );
 export const ChartDisplay = (props) => {
     const [wages, setWages] = useState({});
-    const [labels, setLabels] = useState([]);
     const [chartData, setChartData] = useState({});
     const [occId, setOccId] = useState(1);
         const formatChartData = () => {
@@ -24,7 +25,6 @@ export const ChartDisplay = (props) => {
                 }
             });
             setChartData({labels:newLabels,wages:newWages});
-            setLabels(newLabels);
         }
         const getJobData = async () => {
             try {
@@ -43,7 +43,6 @@ export const ChartDisplay = (props) => {
             getJobData();
             setOccId(props.occId);
         }
-        console.log("What does the chart data look like right now? ", chartData);
         const sampleData = {
             labels: chartData.labels,
             datasets: [{
@@ -94,17 +93,38 @@ export const ChartDisplay = (props) => {
                     }
                 }
             }],
-          };
-          const options = {
-            responsive: true,
-            plugins: {
-                tooltip: {
-                    backgroundColor: '#ff789a'
+        };
+        const options = {
+        responsive: true,
+        scales: {
+            x: {
+                ticks: {
+                    autoSkip: false
+                }
+            },
+            y: {
+                ticks: {
+                    callback: function(value, index, ticks){
+                        return '$' + value;
+                    }
                 }
             }
-          }
+        },
+        plugins: {
+            tooltip: {
+                backgroundColor: '#ff789a'
+            }
+        }
+        }
   return(
-        <div id="graph-container"><Line options={options} data={sampleData}></Line></div>
+        <div>
+            <div className="filter-btn-container">
+            <DropdownSelect chartData={chartData} setChartData={setChartData} wages={wages} setWages={setWages} formatChartData={formatChartData}></DropdownSelect>
+            </div>
+            <div id="graph-container">
+                <Line options={options} data={sampleData}></Line>
+            </div>
+        </div>
   )
  
 }
