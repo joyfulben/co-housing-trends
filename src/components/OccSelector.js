@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from 'react';
 import { ChartDisplay } from './ChartDisplay';
+import OccupationDropdown from './MUI/OccupationDropdown';
 let ref = require('../api/ref.json');
 
 export const OccSelector = () =>{
@@ -23,11 +24,7 @@ export const OccSelector = () =>{
     }
     return (
         <div>
-            <select onChange={handleOccupationSelect}>
-                <option value="0">Select Occupation</option>
-
-            {ref.occupations.map((occ)=><option key={occ.id} value={occ.id}>{occ.title}</option>)}
-            </select>
+            <OccupationDropdown setOccId={setOccId} occRef={ref}/>
             <ChartDisplay occId={occId} />
         </div>
     )
