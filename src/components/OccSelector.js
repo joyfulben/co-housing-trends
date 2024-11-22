@@ -1,31 +1,41 @@
 import React, { useEffect } from "react";
 import { useState } from 'react';
-import { ChartDisplay } from './ChartDisplay';
+import ChartDisplay from './ChartDisplay';
 import OccupationDropdown from './MUI/OccupationDropdown';
-let ref = require('../api/ref.json');
 
 export const OccSelector = () =>{
 
     const [occId, setOccId] = useState(0);
-    useEffect(()=>{
-        console.log("selector state of occId: ", occId);
-    })
-    ref.occupations.sort(function(a, b) {
-        var textA = a.title.toUpperCase();
-        var textB = b.title.toUpperCase();
-        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    });
-    
-    const handleOccupationSelect = (e) => {
-        const valNum=Number(e.target.value);
-        console.log("Value for the occupation: ", valNum);
+    const [occTitle, setOccTitle] = useState("");
+    const [occTitles, setOccTitles] = useState([]);
+    const [wages, setWages] = useState([]);
+    const [occList, setOccList] = useState([]);
 
-        setOccId(valNum);
-    }
+    useEffect(() => {
+        fetch('http://localhost:4322/fetch-occupations')
+            .then(response => response.json())
+            .then(data => {
+                if (JSON.stringify(data) !== JSON.stringify(occList)) {
+                    setOccList(data);
+                }
+            })
+            .catch(error => console.error("Error fetching occupations:", error));
+    }, []);
+    useEffect(()=> {
+        fetch(`http://localhost:4322/occupations?id=${occId}&sort=alpha`)
+        .then(response => response.json())
+        .then(data => {
+            if (JSON.stringify(data) !== JSON.stringify(occList)) {
+                console.log("data coming from specific occupation fetch: ", data);
+            }
+        }
+    )
+        .catch(error => console.error("Error fetching occupations:", error));
+    },[occId])
     return (
         <div>
-            <OccupationDropdown setOccId={setOccId} occRef={ref}/>
-            <ChartDisplay occId={occId} />
+            <OccupationDropdown occList={occList} setOccId={setOccId} occTitle={occTitle} setOccTitle={setOccTitle}/>
+            <ChartDisplay occId={occId} occTitles={occTitles} wages={wages} />
         </div>
     )
 }
