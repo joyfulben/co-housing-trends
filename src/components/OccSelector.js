@@ -7,8 +7,8 @@ export const OccSelector = () =>{
 
     const [occId, setOccId] = useState(0);
     const [occTitle, setOccTitle] = useState("");
-    const [occTitles, setOccTitles] = useState([]);
-    const [wages, setWages] = useState([]);
+    const [specificOcc, setSpecificOcc] = useState([]);
+    const [filter, setFilter] = useState('alpha');
     const [occList, setOccList] = useState([]);
 
     useEffect(() => {
@@ -21,12 +21,14 @@ export const OccSelector = () =>{
             })
             .catch(error => console.error("Error fetching occupations:", error));
     }, []);
+    // When occId changes, fetch specific data and update occTitles and occWages
     useEffect(()=> {
-        fetch(`http://localhost:4322/occupations?id=${occId}&sort=alpha`)
+        fetch(`http://localhost:4322/occupations?id=${occId}&sort=${filter}`)
         .then(response => response.json())
         .then(data => {
             if (JSON.stringify(data) !== JSON.stringify(occList)) {
                 console.log("data coming from specific occupation fetch: ", data);
+                setSpecificOcc(data);
             }
         }
     )
@@ -35,7 +37,7 @@ export const OccSelector = () =>{
     return (
         <div>
             <OccupationDropdown occList={occList} setOccId={setOccId} occTitle={occTitle} setOccTitle={setOccTitle}/>
-            <ChartDisplay occId={occId} occTitles={occTitles} wages={wages} />
+            <ChartDisplay specificOcc={specificOcc} setFilter={setFilter} filter={filter} />
         </div>
     )
 }
