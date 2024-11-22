@@ -5,9 +5,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function FilterDropdown(props) {
+export default function FilterDropdown({filter, setFilter}) {
   const handleFilterChange = (event) => {
-    props.setFilter(event.target.value);
+    setFilter(event.target.value);
   };
 
   return (
@@ -17,7 +17,7 @@ export default function FilterDropdown(props) {
         <Select
           labelId="filter-label"
           id="filter-select"
-          value={props.filter}
+          value={filter}
           label="Filter By"
           onChange={handleFilterChange}
         >
