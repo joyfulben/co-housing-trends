@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from 'react';
 import ChartDisplay from './ChartDisplay';
 import OccupationDropdown from './MUI/OccupationDropdown';
+import FilterDropdown from './MUI/FilterDropdown';
 
 export const OccSelector = () =>{
 
@@ -27,17 +28,20 @@ export const OccSelector = () =>{
         .then(response => response.json())
         .then(data => {
             if (JSON.stringify(data) !== JSON.stringify(occList)) {
-                console.log("data coming from specific occupation fetch: ", data);
                 setSpecificOcc(data);
             }
         }
     )
         .catch(error => console.error("Error fetching occupations:", error));
-    },[occId])
+    },[occId,filter])
     return (
         <div>
             <OccupationDropdown occList={occList} setOccId={setOccId} occTitle={occTitle} setOccTitle={setOccTitle}/>
-            <ChartDisplay specificOcc={specificOcc} setFilter={setFilter} filter={filter} />
+            <h2>{occTitle}</h2>
+            <div className="filter-btn-container">
+                <FilterDropdown filter={filter} setFilter={setFilter} />
+            </div>
+            <ChartDisplay specificOcc={specificOcc} />
         </div>
     )
 }
