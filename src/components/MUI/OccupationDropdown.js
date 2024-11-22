@@ -14,6 +14,10 @@ function OccupationDropdown({ occList, setOccId, occTitle, setOccTitle }) {
         setOccId(selectedId);
         // setOccTitle(selectedTitle);
     };
+    const handleOccSelection = (value)=>{
+        setOccId(value.id);
+        setOccTitle(value.label);
+    }
 
     // Safely access `occupations` in `occList`
     const occupations = occList?.occupations || [];
@@ -23,6 +27,7 @@ function OccupationDropdown({ occList, setOccId, occTitle, setOccTitle }) {
                 disablePortal
                 options={occupations}
                 renderInput={(params)=> <TextField {...params} label="Occupation" />}
+                onChange={(e,v)=>handleOccSelection(v)}
             />
         </Box>
     );
