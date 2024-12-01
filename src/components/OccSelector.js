@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from 'react';
 import ChartDisplay from './ChartDisplay';
+import USMap from './USMap';
 import OccupationDropdown from './MUI/OccupationDropdown';
 import FilterDropdown from './MUI/FilterDropdown';
 
@@ -42,6 +43,7 @@ export const OccSelector = () =>{
                 <FilterDropdown filter={filter} setFilter={setFilter} />
             </div>
             <ChartDisplay specificOcc={specificOcc} />
+            <USMap wages={specificOcc}/>
         </div>
     )
 }
