@@ -13,9 +13,15 @@ function ChartDisplay({ specificOcc }) {
             {
                 label: 'Average state wage',
                 data: specificOcc.wages,
-                showLine: false,
-                fill: false,
-                backgroundColor: ['blue', 'green', /* more colors */],
+                backgroundColor: (context)=>{
+                    const chart = context.chart;
+                    const {ctx, chartArea } = chart;
+                    if(!chartArea){
+                        return null
+                    } else {
+                        return getGradient(chart);
+                    }
+                },
                 borderColor: ['silver'],
                 borderWidth: 1,
                 tooltip: {
@@ -43,7 +49,14 @@ function ChartDisplay({ specificOcc }) {
         }
         // plugins: { tooltip: { backgroundColor: '#ff789a' } },
     }), []);
-
+    function getGradient(chart){
+        const {ctx, chartArea: {top, bottom, left, right}} = chart;
+        const gradientSegment = ctx.createLinearGradient(left,0,right,0);
+        gradientSegment.addColorStop(0,'#008721');
+        gradientSegment.addColorStop(0.5,'#00fa3e');
+        gradientSegment.addColorStop(1,'#b6ffc1');
+        return gradientSegment;
+    }
     return (
         <div>
             <div id="graph-container">
