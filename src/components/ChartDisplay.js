@@ -7,7 +7,6 @@ ChartJS.register(CategoryScale, LinearScale, Tooltip, Legend, BarElement);
 function ChartDisplay({ specificOcc }) {
     useEffect(()=>{
     },[specificOcc])
-    // Memoize chart data and options
     const sampleData = useMemo(() => ({
         labels: specificOcc.states,
         datasets: [
