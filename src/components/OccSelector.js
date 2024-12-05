@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from 'react';
 import ChartDisplay from './ChartDisplay';
 import USMap from './USMap';
+import SideChart from './SideChart';
 import OccupationDropdown from './MUI/OccupationDropdown';
 import FilterDropdown from './MUI/FilterDropdown';
 
@@ -12,6 +13,9 @@ export const OccSelector = () =>{
     const [specificOcc, setSpecificOcc] = useState([]);
     const [filter, setFilter] = useState('alpha');
     const [occList, setOccList] = useState([]);
+    const [displayChart, setDisplayChart] = useState(false);
+    const [selectedState, setSelectedState] = useState('');
+    const [stateWages, setStateWages] = useState({});
 
     useEffect(() => {
         fetch('http://localhost:4322/fetch-occupations')
@@ -34,7 +38,24 @@ export const OccSelector = () =>{
         }
     )
         .catch(error => console.error("Error fetching occupations:", error));
-    },[occId,filter])
+    },[occId,filter]);
+
+    function displaySideChart (state) {
+        setSelectedState(state);
+        if (!displayChart) {
+            setDisplayChart(true);
+        }
+        fetch(`http://localhost:4322/occupations?id=${occId}&all_years=true&state=${selectedState}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data) {
+                setStateWages(data);
+            }
+        }
+    )
+    .catch(error => console.error("Error fetching state data:", error));
+        
+    }
     return (
         <div>
             <OccupationDropdown occList={occList} setOccId={setOccId} occTitle={occTitle} setOccTitle={setOccTitle}/>
@@ -43,7 +64,10 @@ export const OccSelector = () =>{
                 <FilterDropdown filter={filter} setFilter={setFilter} />
             </div>
             <ChartDisplay specificOcc={specificOcc} />
-            <USMap wages={specificOcc}/>
+            <div className="map-container">
+            <USMap wages={specificOcc} displaySideChart={displaySideChart}/>
+            <SideChart stateWages={stateWages}></SideChart>
+            </div>
         </div>
     )
 }
