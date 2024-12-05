@@ -1,10 +1,6 @@
 import * as React from 'react';
 
-export default function USMap({wages}) {
-    const style = {
-        width:"100%",
-        height:"50vw"
-    }
+export default function USMap({wages,displaySideChart}) {
     const svgEl = document.getElementsByClassName("land");
     const toolTip = document.getElementById("tooltip");
     for (let path of svgEl) {
