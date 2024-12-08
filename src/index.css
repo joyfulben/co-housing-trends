@@ -52,12 +52,16 @@ img.money{
   width: 80%;
   display: flex;
 }
+/***************************
+US Map Style
+**************************/
 svg.land{
   stroke-width: 2px;
 }
+path.land{
+  transform: scale(0.8);
+}
 #usmap-svg svg{
-  width:100%;
-  height:50vw;
   fill-opacity: 1;
   stroke:white;
   stroke-opacity: 1;
@@ -79,6 +83,19 @@ svg.land{
   font-size: 12px;
   display: none;
   white-space: pre;
+}
+.map-container{
+  width: 100%;
+  display:flex;
+}
+.usmap-container{
+  display:flex;
+}
+#side-chart-container{
+  display: flex;
+  align-items: center;
+  width: 35vw;
+  height: 70vh;
 }
 @keyframes spin {
   from {transform:rotate(0deg);}
