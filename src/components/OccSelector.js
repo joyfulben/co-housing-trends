@@ -59,7 +59,8 @@ export const OccSelector = () =>{
     return (
         <div>
             <OccupationDropdown occList={occList} setOccId={setOccId} occTitle={occTitle} setOccTitle={setOccTitle}/>
-            <h2>{occTitle}</h2>
+            {(specificOcc.states && specificOcc.states.length)?<h2 style={{color: "black"}}>{occTitle}</h2>:<div style={{display:"flex",flexDirection:"column"}}><h2 style={{color: "red"}}>{occTitle}</h2><h3 style={{color:"red"}}>Please choose another occupation</h3></div>}
+            
             <div className="filter-btn-container">
                 <FilterDropdown filter={filter} setFilter={setFilter} />
             </div>
