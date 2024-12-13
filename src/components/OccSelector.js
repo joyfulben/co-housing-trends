@@ -16,9 +16,10 @@ export const OccSelector = () =>{
     const [displayChart, setDisplayChart] = useState(false);
     const [selectedState, setSelectedState] = useState('');
     const [stateWages, setStateWages] = useState({});
+    const baseAPI = "https://occ-server-git-main-ben-fishers-projects-48f1cfec.vercel.app"
 
     useEffect(() => {
-        fetch('http://localhost:4322/fetch-occupations')
+        fetch(`${baseAPI}/fetch-occupations`)
             .then(response => response.json())
             .then(data => {
                 if (JSON.stringify(data) !== JSON.stringify(occList)) {
@@ -27,35 +28,35 @@ export const OccSelector = () =>{
             })
             .catch(error => console.error("Error fetching occupations:", error));
     }, []);
-    // When occId changes, fetch specific data and update occTitles and occWages
+    // When occId or filter changes, fetch specific data and update occTitles and occWages
     useEffect(()=> {
-        fetch(`http://localhost:4322/occupations?id=${occId}&sort=${filter}`)
+        fetch(`${baseAPI}/occupations?id=${occId}&sort=${filter}`)
         .then(response => response.json())
         .then(data => {
             if (JSON.stringify(data) !== JSON.stringify(occList)) {
                 setSpecificOcc(data);
-            }
+            } 
         }
     )
         .catch(error => console.error("Error fetching occupations:", error));
     },[occId,filter]);
 
-    function displaySideChart (state) {
-        setSelectedState(state);
+    function displaySideChart(state) {
+        setSelectedState(state); // This will still update the state for other parts of the app.
         if (!displayChart) {
             setDisplayChart(true);
         }
-        fetch(`http://localhost:4322/occupations?id=${occId}&all_years=true&state=${selectedState}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data) {
-                setStateWages(data);
-            }
-        }
-    )
-    .catch(error => console.error("Error fetching state data:", error));
-        
+        // Use the `state` parameter directly instead of `selectedState`
+        fetch(`${baseAPI}/fetch-occupations/occupations?id=${occId}&all_years=true&state=${state}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    setStateWages(data);
+                }
+            })
+            .catch(error => console.error("Error fetching state data:", error));
     }
+    
     return (
         <div>
             <OccupationDropdown occList={occList} setOccId={setOccId} occTitle={occTitle} setOccTitle={setOccTitle}/>
@@ -64,10 +65,10 @@ export const OccSelector = () =>{
             <div className="filter-btn-container">
                 <FilterDropdown filter={filter} setFilter={setFilter} />
             </div>
-            <ChartDisplay specificOcc={specificOcc} />
+            <ChartDisplay specificOcc={specificOcc} filter={filter} />
             <div className="map-container">
             <USMap wages={specificOcc} displaySideChart={displaySideChart}/>
-            <SideChart stateWages={stateWages}></SideChart>
+            <SideChart selectedState={selectedState} stateWages={stateWages} occTitle={occTitle}></SideChart>
             </div>
         </div>
     )
