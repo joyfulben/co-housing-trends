@@ -27,6 +27,11 @@ code {
   display: flex;
   justify-content: space-between;
   font-size: 75px;
+  width: 50%;
+  margin: auto;
+  &:h2{
+    margin: auto;
+  }
 }
 .header-letter{
   max-height: 80px;
