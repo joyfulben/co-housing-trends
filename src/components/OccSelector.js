@@ -47,7 +47,7 @@ export const OccSelector = () =>{
             setDisplayChart(true);
         }
         // Use the `state` parameter directly instead of `selectedState`
-        fetch(`${baseAPI}/fetch-occupations/occupations?id=${occId}&all_years=true&state=${state}`)
+        fetch(`${baseAPI}/occupations?id=${occId}&all_years=true&state=${state}`)
             .then(response => response.json())
             .then(data => {
                 if (data) {
