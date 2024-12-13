@@ -3,14 +3,18 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-function OccupationDropdown({ occList, setOccId, occTitle, setOccTitle }) {
+function OccupationDropdown({ occList, setOccId, setOccTitle }) {
     // Log `occList` to debug when it changes
     useEffect(() => {
     }, [occList]);
     // Handle change in selected occupation
     const handleOccSelection = (value)=>{
-        setOccId(value.id);
-        setOccTitle(value.label);
+        if(value!==null){
+            setOccId(value.id);
+            setOccTitle(value.label);
+        }else {
+            return;
+        }
     }
 
     // Safely access `occupations` in `occList`
