@@ -23,14 +23,13 @@ code {
   border-radius: 50%;
   margin: auto 50px;
 }
-.spinner{
-  height: 130px;
-  width: 130px;
-  border-radius: 100%;
-  animation: spin 15s linear infinite;
+.title-container{
+  display: flex;
+  justify-content: space-between;
+  font-size: 75px;
 }
-img.money{
-  max-width: 80px;
+.header-letter{
+  max-height: 80px;
 }
 .ocm-logo {
   height: 80px;
@@ -111,7 +110,3 @@ text{
   stroke: black;
   font-size: 10px;
  }
-@keyframes spin {
-  from {transform:rotate(0deg);}
-  to {transform:rotate(360deg);}
-}
