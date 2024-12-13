@@ -4,14 +4,14 @@ import { Chart as ChartJS, CategoryScale, LinearScale, Tooltip, Legend, BarEleme
 
 ChartJS.register(CategoryScale, LinearScale, Tooltip, Legend, BarElement);
 
-function ChartDisplay({ specificOcc }) {
+function ChartDisplay({ specificOcc, filter }) {
     useEffect(()=>{
-    },[specificOcc])
+    },[specificOcc, filter])
     const sampleData = useMemo(() => ({
         labels: specificOcc.states,
         datasets: [
             {
-                label: 'Average state wage',
+                label: (specificOcc.states && specificOcc.states.length)?'Average state wages in 2022':'Wages not available for this occupation',
                 data: specificOcc.wages,
                 backgroundColor: (context)=>{
                     const chart = context.chart;
@@ -38,7 +38,7 @@ function ChartDisplay({ specificOcc }) {
                 },
             },
         ],
-    }), [specificOcc]);
+    }), [specificOcc, filter]);
 
     const options = useMemo(() => ({
         responsive: true,
@@ -47,7 +47,6 @@ function ChartDisplay({ specificOcc }) {
             x: { ticks: { callback: (value) => '$' + value } },
             y: { ticks: { autoSkip: false } },
         }
-        // plugins: { tooltip: { backgroundColor: '#ff789a' } },
     }), []);
     function getGradient(chart){
         const {ctx, chartArea: {top, bottom, left, right}} = chart;
