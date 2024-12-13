@@ -37,11 +37,8 @@ code {
   max-height: 80px;
 }
 .wm-logo {
-  height: 80px;
-  width: 80px;
-  position: absolute;
-  left: 2.5em;
-  top: 2em;
+  height: 100px;
+  width: 100px;
 }
 .mixed-chart{
   display:flex;
