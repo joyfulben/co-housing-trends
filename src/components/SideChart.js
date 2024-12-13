@@ -4,51 +4,19 @@ import { Chart as ChartJS, CategoryScale, LinearScale, Tooltip, Legend, LineElem
 
 ChartJS.register(CategoryScale, LinearScale, Tooltip, Legend, LineElement, PointElement, Filler);
 
-function SideChart({ stateWages }) {
+function SideChart({ stateWages, selectedState, occTitle }) {
 
     useEffect(()=>{
-       
-    console.log({"data received for state": stateWages});
-    },[stateWages])
-    // const sampleData = useMemo(() => ({
-    //     labels: data.states,
-    //     datasets: [
-    //         {
-    //             label: 'Average state wage',
-    //             data: specificOcc.wages,
-    //             backgroundColor: (context)=>{
-    //                 const chart = context.chart;
-    //                 const {ctx, chartArea } = chart;
-    //                 if(!chartArea){
-    //                     return null
-    //                 } else {
-    //                     return getGradient(chart);
-    //                 }
-    //             },
-    //             borderColor: ['silver'],
-    //             borderWidth: 1,
-                // tooltip: {
-                //     callbacks: {
-                //         label: function (context) {
-                //             let label = context.dataset.label || '';
-                //             if (label) label += ': ';
-                //             if (context.parsed.y !== null) {
-                //                 label += '$'+context.formattedValue;
-                //             }
-                //             return label;
-                //         },
-                //     },
-                // },
-    //         },
-    //     ],
-    // }), [data]);
+    },[stateWages, selectedState])
+   
     const sampleData = {
         labels: stateWages.years,
         datasets: [
             {
-                label: "Average wage",
+                label: `Average wage for ${occTitle} in ${selectedState}`,
                 data: stateWages.wages,
-                borderColor: ['green','yellow'],
+                borderColor: ['green'],
+                backgroundColor: ['#e4fae6'],
                 fill: {
                     target: 'origin',
                     above: function(context){
@@ -63,14 +31,12 @@ function SideChart({ stateWages }) {
                     below: ''
                 },
                 tooltip: {
+                    titleAlign: 'center',
                     callbacks: {
                         label: function (context) {
-                            let label = context.dataset.label || '';
-                            if (label) label += ': ';
                             if (context.parsed.y !== null) {
-                                label += '$'+context.formattedValue;
+                                return '$'+context.formattedValue;
                             }
-                            return label;
                         },
                     },
                 },
@@ -78,6 +44,8 @@ function SideChart({ stateWages }) {
         ],
     }
     const options = useMemo(() => ({
+        pointRadius: 5,
+        pointHitRadius: 5,
         responsive: true
     }), []);
     function getGradient(chart){
@@ -90,7 +58,7 @@ function SideChart({ stateWages }) {
     }
     return (
         <div>
-            <div id="graph-container">
+            <div id="side-chart-container">
                 <Line options={options} data={sampleData} />
             </div>
         </div>
