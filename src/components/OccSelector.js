@@ -16,7 +16,7 @@ export const OccSelector = () =>{
     const [displayChart, setDisplayChart] = useState(false);
     const [selectedState, setSelectedState] = useState('');
     const [stateWages, setStateWages] = useState({});
-    const baseAPI = "https://occ-server-git-main-ben-fishers-projects-48f1cfec.vercel.app"
+    const baseAPI = "https://occ-server.vercel.app/"
 
     useEffect(() => {
         fetch(`${baseAPI}/fetch-occupations`)
