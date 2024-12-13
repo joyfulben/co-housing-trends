@@ -29,9 +29,9 @@ code {
   font-size: 75px;
   width: 50%;
   margin: auto;
-  &:h2{
-    margin: auto;
-  }
+}
+.title-container > h2 {
+  margin: auto;
 }
 .header-letter{
   max-height: 80px;
