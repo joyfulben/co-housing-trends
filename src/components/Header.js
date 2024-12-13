@@ -9,7 +9,7 @@ export const Header = () => {
             </div>
             <img className="ocm-logo" src="wage_map_logo.png"/>
         </div>
-        <h2>Occupational Wages</h2>
+        <h2>Wage Map</h2>
     </div>
     )
 }
