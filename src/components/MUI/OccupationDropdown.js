@@ -8,12 +8,6 @@ function OccupationDropdown({ occList, setOccId, occTitle, setOccTitle }) {
     useEffect(() => {
     }, [occList]);
     // Handle change in selected occupation
-    const handleFilterChange = (event) => {
-        const selectedId = event.target.value;
-        // console.log("Occupation selected: ", selectedId,"Title selected: ",selectedTitle);
-        setOccId(selectedId);
-        // setOccTitle(selectedTitle);
-    };
     const handleOccSelection = (value)=>{
         setOccId(value.id);
         setOccTitle(value.label);
