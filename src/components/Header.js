@@ -4,6 +4,7 @@ export const Header = () => {
     return (
     <div className="header-container">
         <div className="logo-container">
+            <img className="wm-logo" src="wage_map_logo.png"/>
         </div>
         <div className="title-container">
             <h2>
