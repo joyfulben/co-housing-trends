@@ -97,6 +97,20 @@ path.land{
   width: 35vw;
   height: 70vh;
 }
+/**********************
+Small North East State Rectangles
+**********************/
+rect:hover, text:hover{
+  cursor: pointer;
+}
+rect{
+  stroke: orange;
+}
+text{
+  fill: black;
+  stroke: black;
+  font-size: 10px;
+ }
 @keyframes spin {
   from {transform:rotate(0deg);}
   to {transform:rotate(360deg);}
