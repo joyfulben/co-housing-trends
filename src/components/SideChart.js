@@ -46,7 +46,17 @@ function SideChart({ stateWages, selectedState, occTitle }) {
     const options = useMemo(() => ({
         pointRadius: 5,
         pointHitRadius: 5,
-        responsive: true
+        responsive: true,
+        scales: {
+            y: {
+                ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: function(value, index, ticks) {
+                        return '$' + value;
+                    }
+                }
+            }
+        }
     }), []);
     function getGradient(chart){
         const {ctx, chartArea: {top, bottom, left, right}} = chart;
