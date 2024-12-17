@@ -9,7 +9,7 @@ import FilterDropdown from './MUI/FilterDropdown';
 export const OccSelector = () =>{
 
     const [occId, setOccId] = useState(151211);
-    const [occTitle, setOccTitle] = useState("");
+    const [occTitle, setOccTitle] = useState("Computer systems analysts");
     const [specificOcc, setSpecificOcc] = useState([]);
     const [filter, setFilter] = useState('alpha');
     const [occList, setOccList] = useState([]);
