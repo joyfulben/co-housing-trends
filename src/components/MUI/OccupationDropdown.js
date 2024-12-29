@@ -6,6 +6,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 function OccupationDropdown({ occList, setOccId, setOccTitle }) {
     // Log `occList` to debug when it changes
     useEffect(() => {
+        console.log("🪸🪸🪸🪸🪸🪸🪸🪸🪸🪸🪸🪸🪸🪸🪸🪸🪸🪸🪸 occList passed into OccupationDropdown: ",occList);
     }, [occList]);
     // Handle change in selected occupation
     const handleOccSelection = (value)=>{
