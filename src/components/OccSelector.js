@@ -41,7 +41,8 @@ export const OccSelector = () =>{
         .catch(error => console.error("Error fetching occupations:", error));
     },[occId,filter]);
 
-    function displaySideChart(state) {
+    function displaySideChart(e,state) {
+        console.log("Current target: ", e);
         const previousState = document.querySelector(`[title=${selectedState}]`);
         previousState.classList.remove("selected");
         setSelectedState(state); // This will still update the state for other parts of the app.
