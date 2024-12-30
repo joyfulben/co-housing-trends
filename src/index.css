@@ -75,6 +75,9 @@ path.land{
     cursor:pointer;
   }
 }
+.selected{
+  fill: orange;
+}
 #tooltip {
   position: absolute;
   background-color: #333;
