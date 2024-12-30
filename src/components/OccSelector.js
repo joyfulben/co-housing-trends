@@ -42,7 +42,8 @@ export const OccSelector = () =>{
     },[occId,filter]);
 
     function displaySideChart(e,state) {
-        console.log("Current target: ", e);
+        const previousState = document.querySelector(`[title=${selectedState}]`);
+        previousState.classList.remove("selected");
         setSelectedState(state); // This will still update the state for other parts of the app.
         e.target.classList.add("selected"); //Dynamically update the selected state's class to selected
         // Use the `state` parameter directly
