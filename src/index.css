@@ -76,7 +76,7 @@ path.land{
   }
 }
 .selected{
-  fill: orange;
+  fill: orange !important;
 }
 #tooltip {
   position: absolute;
