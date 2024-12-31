@@ -13,8 +13,7 @@ export const OccSelector = () =>{
     const [specificOcc, setSpecificOcc] = useState([]);
     const [filter, setFilter] = useState('alpha');
     const [occList, setOccList] = useState([]);
-    const [displayChart, setDisplayChart] = useState(false);
-    const [selectedState, setSelectedState] = useState('');
+    const [selectedState, setSelectedState] = useState('Nevada');
     const [stateWages, setStateWages] = useState({});
     const baseAPI = "https://occ-server.vercel.app"
 
