@@ -44,11 +44,17 @@ export const OccSelector = () =>{
     function displaySideChart(e,state) {
         //If a previous state was selected, remove its selected class
         if (selectedState.length){
-            const previousState = document.querySelector(`[title="${selectedState}"]`);
-            previousState.classList.remove("selected");
+            const previousState = document.querySelectorAll(`[title="${selectedState}"]`);
+            previousState.forEach(el => {
+                el.classList.remove("selected");
+            });
         };
         setSelectedState(state); // This will still update the state for other parts of the app.
-        e.target.classList.add("selected"); //Dynamically update the selected state's class to selected
+         //Dynamically update the selected state's class to selected
+        const selectedState = document.querySelectorAll(`[title="${state}"]`);
+        selectedState.forEach(el => {
+            el.classList.add("selected");
+        })
         // Use the `state` parameter directly
         fetch(`${baseAPI}/occupations?id=${occId}&all_years=true&state=${state}`)
             .then(response => response.json())
