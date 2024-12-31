@@ -41,10 +41,10 @@ export const OccSelector = () =>{
         .catch(error => console.error("Error fetching occupations:", error));
     },[occId,filter]);
 
-    function displaySideChart(e,state) {
+    function displaySideChart( state) {
         //If a previous state was selected, remove its selected class
-        if (state.length){
-            const previousState = document.querySelectorAll(`[title="${state}"]`);
+        if (selectedState.length){
+            const previousState = document.querySelectorAll(`[title="${selectedState}"]`);
             previousState.forEach(el => {
                 el.classList.remove("selected");
             });
@@ -55,7 +55,7 @@ export const OccSelector = () =>{
         selectedState.forEach(el => {
             el.classList.add("selected");
         })
-        // Use the `state` parameter directly
+        //Use state variable to fetch multi year data for specific occupation
         fetch(`${baseAPI}/occupations?id=${occId}&all_years=true&state=${state}`)
             .then(response => response.json())
             .then(data => {
