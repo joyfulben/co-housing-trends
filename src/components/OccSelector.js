@@ -40,9 +40,9 @@ export const OccSelector = () =>{
         .catch(error => console.error("Error fetching occupations:", error));
     },[occId,filter]);
 
-    function displaySideChart( state) {
+    function displaySideChart(state) {
         //If a previous state was selected, remove its selected class
-        if (selectedState.length){
+        if (selectedState && selectedState.length){
             const previousState = document.querySelectorAll(`[title="${selectedState}"]`);
             previousState.forEach(el => {
                 el.classList.remove("selected");
