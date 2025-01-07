@@ -41,6 +41,7 @@ export const OccSelector = () =>{
     },[occId,filter]);
 
     function displaySideChart(state) {
+        console.log({"Selected state":selectedState,"State being passed in":state});
         //If a previous state was selected, remove its selected class
         if (selectedState && selectedState.length){
             const previousState = document.querySelectorAll(`[title="${selectedState}"]`);
